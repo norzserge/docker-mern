@@ -21,7 +21,12 @@ if (process.env.NODE_ENV === 'production') {
 
 async function start() {
   try {
-    await mongoose.connect(`mongodb://mongodb:27017/notes`, {
+    const {
+      MONGO_INITDB_ROOT_USERNAME: username,
+      MONGO_INITDB_ROOT_PASSWORD: password,
+      MONGO_HOST: host,
+    } = process.env;
+    await mongoose.connect(`mongodb://${username}:${password}@${host}/notes?authSource=admin`, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })

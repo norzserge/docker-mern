@@ -1,4 +1,12 @@
+make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/sergejmetelskij/Documents/GitHub/docker-mern'
-docker run -d -p 27017:27017 --rm --name mongodb mongo
+docker run -p 27017:27017 \
+	-d \
+	--rm \
+	--name mongodb \
+	--network notes-net \
+	--env-file ./config/development.env \
+	-v mongo-data:/data/db \
+	mongo
 make: Leaving directory `/Users/sergejmetelskij/Documents/GitHub/docker-mern'
  

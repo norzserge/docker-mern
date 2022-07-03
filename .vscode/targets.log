@@ -6,11 +6,15 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Sun Jul  3 13:50:34 2022
+
+# Make data base, printed on Sun Jul  3 17:44:47 2022
 
 # Variables
 
+ 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -99,6 +103,7 @@ MAKE_VERSION := 3.81
 USER = sergejmetelskij
 # makefile
 .DEFAULT_GOAL := mongo
+ 
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -160,9 +165,9 @@ VSCODE_PID = 528
 
 # Directories
 
-# . (device 16777233, inode 661363): 8 files, no impossibilities.
+# . (device 16777233, inode 661363): 9 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -179,6 +184,20 @@ all:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+ 
+backend:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 12):
+	docker run -p 5001:5001 \
+	--rm \
+	--name notes-backend \
+	--network notes-net \
+	--env-file ./config/development.env \
+	notes-backend
+	
+
 # Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
@@ -188,11 +207,23 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-02 21:01:02
+#  Last modified 2022-07-03 17:41:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+frontend:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 20):
+	docker run -p 3000:3000 \
+	-d \
+	--rm \
+	--name notes-forntend \
+	notes-frontend
+	
 
 # Not a target:
 .DEFAULT:
@@ -205,11 +236,18 @@ mongo:
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 2):
-	docker run -d -p 27017:27017 --rm --name mongodb mongo
+	docker run -p 27017:27017 \
+	-d \
+	--rm \
+	--name mongodb \
+	--network notes-net \
+	--env-file ./config/development.env \
+	-v mongo-data:/data/db \
+	mongo
 	
 
 # files hash-table stats:
-# Load=5/1024=0%, Rehash=0, Collisions=0/17=0%
+# Load=7/1024=1%, Rehash=0, Collisions=0/19=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -221,8 +259,6 @@ mongo:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Jul  3 13:50:34 2022
+# Finished Make data base on Sun Jul  3 17:44:47 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-
