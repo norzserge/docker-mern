@@ -1,0 +1,4 @@
+make: Entering directory `/Users/sergejmetelskij/Documents/GitHub/docker-mern'
+docker run -d -p 27017:27017 --rm --name mongodb mongo
+make: Leaving directory `/Users/sergejmetelskij/Documents/GitHub/docker-mern'
+ 
