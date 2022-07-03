@@ -26,3 +26,15 @@ frontend:
 	--name notes-frontend \
 	-v /Users/sergejmetelskij/Documents/GitHub/docker-mern/client/src:/app/src \
 	notes-frontend
+
+stop:
+	docker stop mongodb notes-frontend notes-backend
+
+dev:
+	docker-compose -f docker-compose.yml up -d
+
+build:
+	docker-compose -f docker-compose.production.yml up
+
+down:
+	docker-compose down
