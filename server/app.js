@@ -2,10 +2,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 const routes = require('./routes/note.routes')
+const cors = require('cors')
 
 const app = express()
 const port = process.env.PORT ?? 5001
 
+app.use(cors())
 app.use(express.json({ extended: true }))
 app.use('/api/note', routes)
 
@@ -19,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 
 async function start() {
   try {
-    await mongoose.connect(`mongodb://localhost:27017/notes`, {
+    await mongoose.connect(`mongodb://mongodb:27017/notes`, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
