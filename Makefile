@@ -38,3 +38,13 @@ build:
 
 down:
 	docker-compose down
+
+# SSH (need to add actual server IP)
+
+SSH_STRING:=root@31.184.254.152
+
+ssh:
+	ssh $(SSH_STRING)
+
+copy-files
+	scp -r ./* $(SSH_STRING):/root/app
