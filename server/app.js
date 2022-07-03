@@ -4,7 +4,7 @@ const path = require('path')
 const routes = require('./routes/note.routes')
 
 const app = express()
-const port = process.env.PORT ?? 5000
+const port = process.env.PORT ?? 5001
 
 app.use(express.json({ extended: true }))
 app.use('/api/note', routes)
@@ -23,11 +23,13 @@ async function start() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
+    console.log('MongoDB connected!');
     app.listen(
       port,
       console.log.bind(console, `Server has been started on port ${port}`)
     )
   } catch (e) {
+    console.log('MongoDB connection failed :(', e.message);
     console.log(e)
   }
 }

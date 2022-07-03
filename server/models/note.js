@@ -5,4 +5,4 @@ const schema = new Schema({
   date: {type: Date, default: Date.now}
 })
 
-module.exports = model('Note', schema)
+module.exports = model('Note', schema);
